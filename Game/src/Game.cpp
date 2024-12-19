@@ -4,7 +4,7 @@
 #include "../include/SettingsMenu.h"
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "Main Menu");
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "Main Menu salut les copain");
 
     // Create a vector of RectangleShape objects
     std::vector<sf::RectangleShape> shapes = createRectangles();
