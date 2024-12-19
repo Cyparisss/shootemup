@@ -4,7 +4,7 @@
 #include "../include/SettingsMenu.h"
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "Main Menu salut les copain");
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "Main Menu");
 
     // Create a vector of RectangleShape objects
     std::vector<sf::RectangleShape> shapes = createRectangles();
@@ -12,6 +12,7 @@ int main() {
     // Create a MainMenu object and pass it the vector of rectangles
     bool isMainMenuActive = true;
     MainMenu mainMenu(window, shapes, isMainMenuActive);
+	SettingsMenu settingsMenu(window);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -20,11 +21,11 @@ int main() {
                 window.close();
             }
 
-            if (SettingsMenu.isActive()) {
-                SettingsMenu.handleEvent(event);
+            if (settingsMenu.isActive()) {
+                settingsMenu.handleEvent(event, mainMenu);
             }
             else {
-                MainMenu.handleEvent(event);
+                mainMenu.handleEvent(event);
             }
             
         }
@@ -34,14 +35,14 @@ int main() {
         }
 
 		if (mainMenu.shouldOpenSettings()) {
-            SettingsMenu.setActive(true);
+            settingsMenu.setActive(true);
         }
 
         window.clear(sf::Color::Black);
 
         // Draw the main menu if it's active
-        if (SettingsMenu.isActive()) {
-            SettingsMenu.draw();
+        if (settingsMenu.isActive()) {
+            settingsMenu.draw();
         } else if (isMainMenuActive) {
             mainMenu.draw();
         } else {

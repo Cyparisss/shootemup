@@ -8,13 +8,18 @@ public:
     MainMenu(sf::RenderWindow& window, const std::vector<sf::RectangleShape>& shapes, bool& isMainMenuActive);
 
     void draw();
-    void handleEvent(const sf::Event& event);
+    void handleEvent(const sf::Event &event);
     bool shouldCloseWindow() const {
         return closeWindow;
     }
     bool shouldOpenSettings() const {
         return openSettings;
     }
+    void setActive(bool isActive) { 
+        isMainMenuActive = isActive; 
+    };
+    
+
 
 private:
     sf::RenderWindow& window;
@@ -24,4 +29,8 @@ private:
     sf::Text titleText;
     bool closeWindow;
     bool openSettings;
+    sf::Texture logoTexture;
+	sf::Sprite logoSprite;
+    sf::Texture bg_MenuTexture;
+	sf::Sprite bg_MenuSprite;
 };

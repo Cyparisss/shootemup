@@ -1,6 +1,6 @@
 #include "../include/SettingsMenu.h"
+#include "SFML/Graphics.hpp"
 #include <iostream>
-#include "SettingsMenu.h"
 
 SettingsMenu::SettingsMenu(sf::RenderWindow& window)
 	: window(window), active(false) {
@@ -8,6 +8,14 @@ SettingsMenu::SettingsMenu(sf::RenderWindow& window)
 		std::cerr << "Failed to load front file : arial.ttf" << std::endl;
 	}
 	createShapes();
+	if (!bg_MenuTexture.loadFromFile("Assets/bg_Main_Menu.jpg")) {
+		std::cerr << "Failed to load background image file : background.png" << std::endl;
+	}
+	bg_MenuSprite.setTexture(bg_MenuTexture);
+}
+
+bool SettingsMenu::isActive() {
+	return active;
 }
 
 void SettingsMenu::createShapes() {
@@ -52,6 +60,9 @@ void SettingsMenu::createShapes() {
 }
 
 void SettingsMenu::draw() {
+	window.draw(bg_MenuSprite);
+	bg_MenuSprite.setScale(sf::Vector2f(0.3335, 0.3335));
+
 	if (!active) return;
 
 	window.draw(titleText);
@@ -64,18 +75,19 @@ void SettingsMenu::draw() {
 	window.draw(backText);
 }
 
-void SettingsMenu::handleEvent(const sf::Event& event) {
+void SettingsMenu::handleEvent(const sf::Event& event, MainMenu& mainMenu) {
 	if (!active) return;
 
 	if (event.type == sf::Event::MouseButtonPressed) {
 		sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 
-		//Check Button Pressed
+		// Check Back Button Pressed
 		if (settingsShapes[0].getGlobalBounds().contains(mousePos)) {
 			active = false;
+			mainMenu.setActive(true); 
 		}
 
-		//Check if VolumeBar is Clicked
+		// Check if VolumeBar is Clicked
 		if (volumeBar.getGlobalBounds().contains(mousePos)) {
 			float newX = mousePos.x - volumeBar.getPosition().x;
 			newX = std::max(0.f, std::min(newX, volumeBar.getSize().x - volumeSlider.getSize().x));

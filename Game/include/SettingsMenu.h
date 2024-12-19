@@ -2,15 +2,16 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "../include/MainMenu.h"
 
 class SettingsMenu {
 public:
     SettingsMenu(sf::RenderWindow& window);
 
     void draw();
-    void handleEvent(const sf::Event& event);
-    bool isActive() const { return active; }
-    void setActive(bool isActive) { active = isActive; }
+    void handleEvent(const sf::Event& event, MainMenu& mainMenu);
+    bool isActive();
+    void setActive(bool isActive) { active = isActive; };
 
 private:
     sf::RenderWindow& window;
@@ -22,6 +23,8 @@ private:
     sf::RectangleShape volumeSlider;
     sf::Text backText;
     bool active;
+    sf::Texture bg_MenuTexture;
+    sf::Sprite bg_MenuSprite;
 
     void createShapes();
 };
