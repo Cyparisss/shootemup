@@ -15,10 +15,10 @@ public:
     bool shouldOpenSettings() const {
         return openSettings;
     }
-    void setActive(bool isActive) { 
-        isMainMenuActive = isActive; 
+    void setActive(bool active) { 
+        isMainMenuActive = active;     
     };
-    
+    bool openSettings;
 
 
 private:
@@ -28,9 +28,19 @@ private:
     sf::Font font;
     sf::Text titleText;
     bool closeWindow;
-    bool openSettings;
+
     sf::Texture logoTexture;
 	sf::Sprite logoSprite;
+
     sf::Texture bg_MenuTexture;
 	sf::Sprite bg_MenuSprite;
+
+    sf::Texture StartButtonTexture;
+	sf::Sprite StartButtonSprite;
+
+    sf::Texture settingsButtonTexture;
+    sf::Sprite settingsButtonSprite;
+
+    sf::Texture exitButtonTexture;
+    sf::Sprite exitButtonSprite;
 };

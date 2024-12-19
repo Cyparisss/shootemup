@@ -18,13 +18,24 @@ private:
     std::vector<sf::RectangleShape> settingsShapes;
     sf::Font font;
     sf::Text titleText;
+
     sf::Text volumeText;
     sf::RectangleShape volumeBar;
     sf::RectangleShape volumeSlider;
+
     sf::Text backText;
     bool active;
+
     sf::Texture bg_MenuTexture;
     sf::Sprite bg_MenuSprite;
 
+    sf::Texture logoTexture;
+    sf::Sprite logoSprite;
+
+    sf::Text controlsText;
+    std::string selectedControls = "Z -> Up \nQ -> Left \nS -> Down \nD -> Right";
+
     void createShapes();
+
+    bool openSettings;
 };

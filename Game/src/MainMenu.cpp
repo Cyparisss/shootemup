@@ -11,24 +11,32 @@ MainMenu::MainMenu(sf::RenderWindow& window, const std::vector<sf::RectangleShap
     if (!logoTexture.loadFromFile("Assets/logo.png")) {
         std::cerr << "Error loading logo.png" << std::endl;
     }
+    if (!StartButtonTexture.loadFromFile("Assets/Start_Button.png")) {
+        std::cerr << "Error loading Start_Button.png" << std::endl;
+    }
+    if (!settingsButtonTexture.loadFromFile("Assets/Settings_Button.png")) {
+        std::cerr << "Error loading Settings_Button.png" << std::endl;
+    }
+    if (!exitButtonTexture.loadFromFile("Assets/Exit_Button.png")) {
+        std::cerr << "Error loading Exit_Button.png" << std::endl;
+    }
     if (!bg_MenuTexture.loadFromFile("Assets/bg_Main_Menu.jpg")) {
         std::cerr << "Failed to load background image file : background.png" << std::endl;
     }
     bg_MenuSprite.setTexture(bg_MenuTexture);
 
-    sf::FloatRect textRect = titleText.getLocalBounds();
-    titleText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-    titleText.setPosition(640, 150);
+
+
 }
 
 void MainMenu::draw() {
-    window.draw(bg_MenuSprite);
-    bg_MenuSprite.setScale(sf::Vector2f(0.3335, 0.3335));
-
     for (const auto& shape : shapes) {
         window.draw(shape);
-        window.draw(titleText);
+        window.draw(titleText); 
     }
+
+    window.draw(bg_MenuSprite);
+    bg_MenuSprite.setScale(sf::Vector2f(0.3335, 0.3335));
 
     logoSprite.setTexture(logoTexture);
     sf::FloatRect spriteRect = logoSprite.getLocalBounds();
@@ -36,6 +44,28 @@ void MainMenu::draw() {
     logoSprite.setPosition(820, 120); 
 	logoSprite.setScale(sf::Vector2f(0.23, 0.23));
 	window.draw(logoSprite);
+
+    window.draw(StartButtonSprite);
+
+    window.draw(settingsButtonSprite);
+
+    window.draw(exitButtonSprite);
+
+    sf::FloatRect textRect = titleText.getLocalBounds();
+    titleText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+    titleText.setPosition(640, 150);
+
+    StartButtonSprite.setTexture(StartButtonTexture);
+    StartButtonSprite.setPosition(110, 70);
+    StartButtonSprite.setScale(0.3f, 0.3f);
+
+    settingsButtonSprite.setTexture(settingsButtonTexture);
+    settingsButtonSprite.setPosition(100, 100);
+    settingsButtonSprite.setScale(0.3f, 0.3f);
+
+    exitButtonSprite.setTexture(exitButtonTexture);
+    exitButtonSprite.setPosition(80, 80);
+    exitButtonSprite.setScale(0.3f, 0.3f);
 
 }
 
